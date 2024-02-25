@@ -1,0 +1,171 @@
+swagger: "2.0"
+info:
+  title: Cuba ILS API
+  description: ABC
+  version: 1.0.0
+  contact:
+    email: snehasishgd10@gmail.com
+  license:
+    name: Apache 2.0
+    url: "http://apache.org/"
+  servers:
+    -url: "http://localhost:1211/"
+    description: Local Server
+    -url: "https://company.com/"
+    description: Company Server
+
+schemes: [http, https]
+
+
+paths: 
+  # Welcome Route
+  /:
+    get: 
+      summary: Returns a single object
+      description: Returns a welcome message
+      responses:
+        200:
+          description: Success
+          schema:
+            type: Object
+            properties:
+              message:
+                type: String
+            example: An object with a property name message. Value is a welcome string.
+        500: 
+          description: Internal Server Error
+          schema:
+            type: Object
+            example: An object with a property name message. Value is a error string.
+
+  /users:
+    get:
+      summary: Getting all users data from users table
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              example:
+                message: Success
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: Internal server error
+                error: Internal server error details
+
+
+  # Add user into users table
+  /users/insert-user:
+    post:
+      summary: Posting data into users table
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: userData
+        schema: 
+          type: Object
+          properties:
+            id:
+              type: number
+            name: 
+              type: string
+            username: 
+              type: string
+            email: 
+              type: string
+            street: 
+              type: string
+            suite: 
+              type: string
+            city: 
+              type: string
+            zipcode: 
+              type: string
+            lat: 
+              type: string
+            lng: 
+              type: string
+            phone: 
+              type: string
+            website: 
+              type: string
+            company_name: 
+              type: string
+            catchPhrase: 
+              type: string
+            bs: 
+              type: string
+      # 
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              example:
+                message: Success
+        409:
+          description: User already exists
+          content:
+            application/json:
+              example:
+                message: User already exists
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: Internal server error
+                error: Internal server error details
+
+  # Add Post into Posts table
+  /posts:
+    post:
+      summary: Add post into posts table
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: userData
+        schema: 
+          type: Object
+          properties:
+            id:
+              type: number
+            userId: 
+              type: number
+            title: 
+              type: string
+            body: 
+              type: string
+      # 
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              example:
+                message: Success
+        404:
+          description: User not found
+          content:
+            application/json:
+              example:
+                message: User not found
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: Internal server error
+                error: Internal server error details
+            
