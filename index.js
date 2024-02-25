@@ -8,7 +8,22 @@ const postRouter = require("./routes/post.router");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  "https://cointab-employee.netlify.app/",
+  "http://localhost:9000",
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 //
 const swaggerUI = require("swagger-ui-express");
