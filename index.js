@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 const allowedOrigins = [
-  "https://cointab-employee.netlify.app/",
+  "https://cointab-employee.netlify.app",
   "http://localhost:9000",
 ];
 
